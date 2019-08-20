@@ -8,6 +8,8 @@ require __DIR__ . '/vendor/autoload.php';
 /**
  * Generate new private key for every new merchant.
  * Make sure you provide an easy recognizable name for each private key/Merchant
+ * NOTE: In case you are providing the BitPay services to your clients,
+ *       you MUST generate a different key per each of your clients
  *
  * WARNING: It is EXTREMELY IMPORTANT to place this key files in a very SECURE location
  **/
