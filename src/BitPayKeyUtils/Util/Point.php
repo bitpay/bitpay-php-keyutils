@@ -72,9 +72,28 @@ class Point implements PointInterface
     /**
      * @inheritdoc
      */
+    public function __serialize()
+    {
+        return serialize(array($this->x, $this->y));
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function serialize()
     {
         return serialize(array($this->x, $this->y));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function __unserialize($data)
+    {
+        list(
+            $this->x,
+            $this->y
+            ) = unserialize($data);
     }
 
     /**
