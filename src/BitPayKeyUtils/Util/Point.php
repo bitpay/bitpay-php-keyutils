@@ -87,4 +87,23 @@ class Point implements PointInterface
             $this->y
             ) = unserialize($data);
     }
+    
+    /**
+     * @return array
+     */
+    public function __serialize(): array
+    {
+        return array($this->x, $this->y);
+    }
+
+    /**
+     * @param array $data
+     */
+    public function __unserialize(array $data): void
+    {
+        list(
+            $this->x,
+            $this->y
+            ) = $data;
+    }
 }
