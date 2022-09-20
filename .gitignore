@@ -15,3 +15,7 @@ composer.phar
 build/.DS_Store
 docs/.DS_Store
 examples/.DS_Store
+
+# PHPUnit
+.phpunit.result.cache
+test/unit/_html

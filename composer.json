@@ -21,5 +21,8 @@
     "ext-json": "*",
     "ext-iconv": "*",
     "ext-gmp": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.5 || ^9.0"
   }
 }
