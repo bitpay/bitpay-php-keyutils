@@ -223,7 +223,9 @@ class Util
             $dec = Math::div($dec, 2);
             //sanity check to avoid infinite loop
             if (Math::cmp($prevDec, $dec) < 1) {
-                throw new Exception('Math library has unexpected behavior, please report the following information to support@bitpay.com. Math Engine is: ' . Math::getEngineName() . '. PHP Version is: ' . phpversion() . '.');
+                throw new Exception('Math library has unexpected behavior, 
+                please report the following information to support@bitpay.com. Math Engine is: 
+                ' . Math::getEngineName() . '. PHP Version is: ' . phpversion() . '.');
             }
         }
 
@@ -312,7 +314,6 @@ class Util
             $yadd = Math::add($ysub2, $ymul);
 
             $R['y'] = Math::mod($yadd, $p);
-
         } catch (Exception $e) {
             throw new Exception('Error in Util::pointDouble(): ' . $e->getMessage());
         }
