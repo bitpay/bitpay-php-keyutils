@@ -87,7 +87,7 @@ class Point implements PointInterface
             $this->y
             ) = unserialize($data);
     }
-    
+
     /**
      * @return array
      */
