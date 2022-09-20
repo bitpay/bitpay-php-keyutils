@@ -43,11 +43,13 @@ class Fingerprint
 
         self::$sigData[] = phpversion();
         self::$sigData[] = get_current_user();
-        self::$sigData[] = php_uname('s') . php_uname('n') . php_uname('m') . PHP_OS . PHP_SAPI . ICONV_IMPL . ICONV_VERSION;
+        self::$sigData[] = php_uname('s') . php_uname('n') . php_uname('m') .
+            PHP_OS . PHP_SAPI . ICONV_IMPL . ICONV_VERSION;
         self::$sigData[] = sha1_file(__FILE__);
 
         self::$finHash = implode(self::$sigData);
-        self::$finHash = sha1(str_ireplace(' ', '', self::$finHash) . strlen(self::$finHash) . metaphone(self::$finHash));
+        self::$finHash = sha1(str_ireplace(' ', '', self::$finHash) .
+            strlen(self::$finHash) . metaphone(self::$finHash));
         self::$finHash = sha1(self::$finHash);
 
         return self::$finHash;
