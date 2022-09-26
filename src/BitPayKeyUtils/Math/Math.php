@@ -35,12 +35,14 @@ class Math
             if (extension_loaded('gmp')) {
                 static::$engine = new GmpEngine();
                 static::$engineName = "GMP";
+            // @codeCoverageIgnoreStart
             } elseif (extension_loaded('bcmath')) {
                 static::$engine = new BcEngine();
                 static::$engineName = "BCMATH";
             } else {
                 throw new Exception('The GMP or BCMATH extension for PHP is required.');
             }
+            // @codeCoverageIgnoreEnd
         }
 
         return call_user_func_array(array(static::$engine, $name), $arguments);
