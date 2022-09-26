@@ -1,6 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\ErrorHandler;
+use BitPayKeyUtils\Util\Error;
 
 class ErrorTest extends TestCase
 {
@@ -8,7 +10,7 @@ class ErrorTest extends TestCase
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->backtrace();
-        $this->assertEquals('backtrace', $result[ 0 ][ 'function' ]);
+        $this->assertEquals('backtrace', $result[0]['function']);
     }
 
     public function testBacktraceWhenPrintIsTrue()
@@ -32,7 +34,7 @@ class ErrorTest extends TestCase
         $exampleLogMessage = 'test';
         $testedObject = $this->getTestedClassObject();
         $errorLogTemporaryFile = tmpfile();
-        $errorLogLocationBackup = ini_set('error_log', stream_get_meta_data($errorLogTemporaryFile)[ 'uri' ]);
+        $errorLogLocationBackup = ini_set('error_log', stream_get_meta_data($errorLogTemporaryFile)['uri']);
         $testedObject->log($exampleLogMessage);
         ini_set('error_log', $errorLogLocationBackup);
         $result = stream_get_contents($errorLogTemporaryFile);
@@ -67,7 +69,7 @@ class ErrorTest extends TestCase
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('error', 'set', null);
-        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $result);
+        $this->assertInstanceOf(ErrorHandler::class, $result);
     }
 
     public function testHandlerWithActionFalse()
@@ -113,8 +115,8 @@ class ErrorTest extends TestCase
         $this->assertTrue($result);
     }
 
-    private function getTestedClassObject(): \BitPayKeyUtils\Util\Error
+    private function getTestedClassObject(): Error
     {
-        return new BitPayKeyUtils\Util\Error();
+        return new Error();
     }
 }
