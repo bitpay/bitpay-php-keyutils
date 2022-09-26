@@ -25,23 +25,23 @@ class PublicKeyTest extends TestCase
     {
         $privateKeyMock = $this->createMock(PrivateKey::class);
 
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $testedObject->setPrivateKey($privateKeyMock);
         $this->assertEquals($privateKeyMock, $this->accessProtected($testedObject, 'privateKey'));
     }
 
-    public function test__toString_when_x_is_null()
+    public function test__toStringWhenXIsNull()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $this->assertEquals('', (string)$testedObject);
     }
 
     /**
      * @throws ReflectionException
      */
-    public function test__toString_when_x_is_not_null_and_math_mod_is_1()
+    public function test__toStringWhenXIsNotNullAndMathModIs1()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
 
         $this->setProtectedPropertyValue($testedObject, 'x', 1);
         $this->setProtectedPropertyValue($testedObject, 'y', 1);
@@ -53,9 +53,9 @@ class PublicKeyTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function test__toString_when_x_is_not_null_and_math_mod_is_not_1()
+    public function test__toStringWhenXIsNotNullAndMathModIsNot1()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
 
         $this->setProtectedPropertyValue($testedObject, 'x', 1);
         $this->setProtectedPropertyValue($testedObject, 'y', 4);
@@ -66,7 +66,7 @@ class PublicKeyTest extends TestCase
 
     public function testIsValidWhenPublicKeyIsBlank()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $result = $testedObject->isValid();
 
         $this->assertFalse($result);
@@ -77,7 +77,7 @@ class PublicKeyTest extends TestCase
      */
     public function testIsValidWhenIsValid()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $this->setProtectedPropertyValue($testedObject, 'dec', self::EXAMPLE_DEC);
         $this->setProtectedPropertyValue($testedObject, 'hex', self::EXAMPLE_HEX);
         $result = $testedObject->isValid();
@@ -90,7 +90,7 @@ class PublicKeyTest extends TestCase
      */
     public function testIsValidWhenIsInvalid()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $this->setProtectedPropertyValue($testedObject, 'dec', 10);
         $this->setProtectedPropertyValue($testedObject, 'hex', 'FF5733');
         $result = $testedObject->isValid();
@@ -103,7 +103,7 @@ class PublicKeyTest extends TestCase
      */
     public function testGetSinWhenKeyNotGenerated()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $this->setProtectedPropertyValue($testedObject, 'hex', null);
 
         $this->expectException(Exception::class);
@@ -116,7 +116,7 @@ class PublicKeyTest extends TestCase
      */
     public function testGetSin()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $privateKeyMock = $this->getValidPrivateKeyMock();
         $testedObject->setPrivateKey($privateKeyMock);
 
@@ -130,7 +130,7 @@ class PublicKeyTest extends TestCase
      */
     public function testGenerate()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
 
         $privateKeyMock = $this->getValidPrivateKeyMock();
         $result = $testedObject->generate($privateKeyMock);
@@ -144,7 +144,7 @@ class PublicKeyTest extends TestCase
      */
     public function testGenerateWhenHexNotEmpty()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $privateKeyMock = $this->createMock(PrivateKey::class);
         $this->setProtectedPropertyValue($testedObject, 'hex', self::EXAMPLE_HEX);
         $result = $testedObject->generate($privateKeyMock);
@@ -157,7 +157,7 @@ class PublicKeyTest extends TestCase
      */
     public function testGenerateWhenPrivateKeyInvalid()
     {
-        $testedObject = $this->getTestedClass();
+        $testedObject = $this->getTestedClassObject();
         $privateKeyMock = $this->createMock(PrivateKey::class);
         $privateKeyMock->expects($this->any())->method('isValid')->willReturn(false);
 
@@ -188,7 +188,7 @@ class PublicKeyTest extends TestCase
         $reflection->setValue($instance, $propertyValue);
     }
 
-    private function getTestedClass(): PublicKey
+    private function getTestedClassObject(): PublicKey
     {
         return new PublicKey();
     }
