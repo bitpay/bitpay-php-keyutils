@@ -30,7 +30,7 @@ class PublicKeyTest extends TestCase
         $this->assertEquals($privateKeyMock, $this->accessProtected($testedObject, 'privateKey'));
     }
 
-    public function test__toStringWhenXIsNull()
+    public function testToStringWhenXIsNull()
     {
         $testedObject = $this->getTestedClassObject();
         $this->assertEquals('', (string)$testedObject);
@@ -39,7 +39,7 @@ class PublicKeyTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function test__toStringWhenXIsNotNullAndMathModIs1()
+    public function testToStringWhenXIsNotNullAndMathModIs1()
     {
         $testedObject = $this->getTestedClassObject();
 
@@ -53,7 +53,7 @@ class PublicKeyTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function test__toStringWhenXIsNotNullAndMathModIsNot1()
+    public function testToStringWhenXIsNotNullAndMathModIsNot1()
     {
         $testedObject = $this->getTestedClassObject();
 
