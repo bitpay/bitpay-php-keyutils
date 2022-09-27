@@ -32,6 +32,8 @@ class FilesystemStorageTest extends TestCase
         $filesystemStorage->load(__DIR__ . '/test2.txt');
     }
 
+    // This test needs the user(not root) and the corresponding permissions (file cannot be read)
+    /**
     public function testLoadNotPermissionException()
     {
         $this->expectException(Exception::class);
@@ -39,6 +41,15 @@ class FilesystemStorageTest extends TestCase
 
         $filesystemStorage = $this->createClassObject();
         $filesystemStorage->load(__DIR__ . '/test3.txt');
+    }
+    **/
+
+    public function testLoad()
+    {
+        $expectedArray = ['Red', 'Green', 'Blue'];
+
+        $filesystemStorage = $this->createClassObject();
+        $this->assertEquals($expectedArray, $filesystemStorage->load(__DIR__ . '/test4.txt'));
     }
 
     private function createClassObject()
