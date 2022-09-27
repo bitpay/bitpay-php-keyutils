@@ -24,6 +24,7 @@ class ErrorTest extends TestCase
 
     public function testLastWhenNoErrorOccured()
     {
+        error_clear_last();
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->last();
         $this->assertNull($result);
