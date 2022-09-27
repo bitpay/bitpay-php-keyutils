@@ -35,9 +35,7 @@ class FilesystemStorageTest extends TestCase
     public function testLoadNotPermissionException()
     {
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('"test3.txt" cannot be read, check permissions');
-
-        @chmod(__DIR__ . '/test3.txt', 0755);
+        $this->expectExceptionMessage('"' . __DIR__ . '/test3.txt" cannot be read, check permissions');
 
         $filesystemStorage = $this->createClassObject();
         $filesystemStorage->load(__DIR__ . '/test3.txt');
