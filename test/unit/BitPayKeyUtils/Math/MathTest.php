@@ -1,5 +1,6 @@
 <?php
 
+use BitPayKeyUtils\Math\GmpEngine;
 use BitPayKeyUtils\Math\Math;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +14,7 @@ class MathTest extends TestCase
 
     public function testGetEngine()
     {
-        $expectedEngine = 'Test engine';
+        $expectedEngine = new GmpEngine();
 
         $math = $this->createClassObject();
         $math::setEngine($expectedEngine);
