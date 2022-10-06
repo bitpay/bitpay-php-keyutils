@@ -105,7 +105,7 @@ class PrivateKey extends Key
      */
     public function hasValidDec()
     {
-        return (!empty($this->dec) || ctype_digit($this->dec));
+        return (!empty($this->dec) || ctype_digit((string)$this->dec));
     }
 
     /**
@@ -113,7 +113,7 @@ class PrivateKey extends Key
      */
     public function hasValidHex()
     {
-        return (!empty($this->hex) || ctype_xdigit($this->hex));
+        return (!empty($this->hex) || ctype_xdigit((string)$this->hex));
     }
 
     /**
@@ -125,7 +125,7 @@ class PrivateKey extends Key
      */
     public function sign($data)
     {
-        if (!ctype_xdigit($this->hex)) {
+        if (!ctype_xdigit((string)$this->hex)) {
             throw new Exception('The private key must be in hex format.');
         }
 
