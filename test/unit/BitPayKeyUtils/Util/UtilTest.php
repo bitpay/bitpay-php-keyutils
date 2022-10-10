@@ -1,6 +1,6 @@
 <?php
 
-use BitPayKeyUtils\Util\PointInterface;
+use BitPayKeyUtils\Util\Point;
 use BitPayKeyUtils\Util\Util;
 use PHPUnit\Framework\TestCase;
 
@@ -77,7 +77,7 @@ class UtilTest extends TestCase
         $this->expectException(Exception::class);
 
         $util = $this->createClassObject();
-        $util::encodeHex(123);
+        $util::encodeHex(null);
     }
 
     public function testEncodeHex1()
@@ -94,13 +94,6 @@ class UtilTest extends TestCase
         $util = $this->createClassObject();
 
         $this->assertEquals($expectedValue, $util::encodeHex('450'));
-    }
-
-    public function testDoubleAndAdd()
-    {
-        $pointInterface = $this->getMockBuilder(PointInterface::class)->getMock();
-        $util = $this->createClassObject();
-        $this->assertIsObject($util::doubleAndAdd('123', $pointInterface));
     }
 
     public function testDecToBin()
@@ -121,7 +114,7 @@ class UtilTest extends TestCase
 
     public function testPointDouble()
     {
-        $pointInterface = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterface = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterface->method('getX')->willReturn('5');
         $pointInterface->method('getY')->willReturn('3');
 
@@ -134,11 +127,11 @@ class UtilTest extends TestCase
 
     public function testPointAdd()
     {
-        $pointInterfaceP = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterfaceP = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterfaceP->method('getX')->willReturn('6');
         $pointInterfaceP->method('getY')->willReturn('9');
 
-        $pointInterfaceQ = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterfaceQ = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterfaceQ->method('getX')->willReturn('8');
         $pointInterfaceQ->method('getY')->willReturn('2');
 
@@ -151,11 +144,11 @@ class UtilTest extends TestCase
 
     public function testPointAddSameValues()
     {
-        $pointInterfaceP = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterfaceP = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterfaceP->method('getX')->willReturn('5');
         $pointInterfaceP->method('getY')->willReturn('3');
 
-        $pointInterfaceQ = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterfaceQ = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterfaceQ->method('getX')->willReturn('5');
         $pointInterfaceQ->method('getY')->willReturn('3');
 
@@ -168,12 +161,12 @@ class UtilTest extends TestCase
 
     public function testPointAddInfinity()
     {
-        $pointInterfaceP = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterfaceP = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterfaceP->method('isInfinity')->willReturn(false);
         $pointInterfaceP->method('getX')->willReturn('1');
         $pointInterfaceP->method('getY')->willReturn('2');
 
-        $pointInterfaceQ = $this->getMockBuilder(PointInterface::class)->getMock();
+        $pointInterfaceQ = $this->getMockBuilder(Point::class)->disableOriginalConstructor()->getMock();
         $pointInterfaceQ->method('isInfinity')->willReturn(true);
 
         $util = $this->createClassObject();

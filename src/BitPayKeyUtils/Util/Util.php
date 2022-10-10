@@ -141,7 +141,7 @@ class Util
      */
     public static function encodeHex($dec)
     {
-        if (!is_string($dec) && !ctype_digit($dec)) {
+        if (!is_string($dec) && !ctype_digit((string)$dec)) {
             throw new Exception(sprintf('Argument is expected to be a string of decimal numbers. 
             You passed in "%s"', gettype($dec)));
         }
