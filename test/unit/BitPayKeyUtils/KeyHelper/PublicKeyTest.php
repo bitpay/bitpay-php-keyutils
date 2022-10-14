@@ -91,7 +91,7 @@ class PublicKeyTest extends TestCase
     public function testIsValidWhenIsInvalid()
     {
         $testedObject = $this->getTestedClassObject();
-        $this->setProtectedPropertyValue($testedObject, 'dec', 10);
+        $this->setProtectedPropertyValue($testedObject, 'dec', null);
         $this->setProtectedPropertyValue($testedObject, 'hex', 'FF5733');
         $result = $testedObject->isValid();
 

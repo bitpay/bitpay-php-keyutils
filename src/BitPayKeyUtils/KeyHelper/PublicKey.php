@@ -72,7 +72,8 @@ class PublicKey extends Key
      */
     public function isValid()
     {
-        return ((!empty($this->hex) && ctype_xdigit($this->hex)) && (!empty($this->dec) && ctype_digit($this->dec)));
+        return ((!empty($this->hex) && ctype_xdigit((string)$this->hex)) &&
+            (!empty($this->dec) && ctype_digit((string)$this->dec)));
     }
 
     /**
