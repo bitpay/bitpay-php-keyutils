@@ -102,6 +102,34 @@ abstract class Key extends Point implements KeyInterface
     }
 
     /**
+     * @return array
+     */
+    public function __serialize(): array
+    {
+        return [
+            $this->id,
+            $this->x,
+            $this->y,
+            $this->hex,
+            $this->dec,
+        ];
+    }
+
+    /**
+     * @param array $data
+     */
+    public function __unserialize(array $data): void
+    {
+        list(
+            $this->id,
+            $this->x,
+            $this->y,
+            $this->hex,
+            $this->dec
+            ) = $data;
+    }
+
+    /**
      * @return boolean
      */
     public function isGenerated()
