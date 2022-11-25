@@ -24,7 +24,7 @@ class KeyTest extends TestCase
         $id = 'test';
         $testedObject = $this->getTestedClass($id);
         $result = $testedObject->getId();
-        $this->assertEquals($id, $result);
+        $this->assertSame($id, $result);
     }
 
     /**
@@ -37,7 +37,7 @@ class KeyTest extends TestCase
 
         $this->setProtectedPropertyValue($testedObject, 'hex', $exampleValue);
         $result = $testedObject->getHex();
-        $this->assertEquals($exampleValue, $result);
+        $this->assertSame($exampleValue, $result);
     }
 
     /**
@@ -50,7 +50,7 @@ class KeyTest extends TestCase
 
         $this->setProtectedPropertyValue($testedObject, 'dec', $exampleValue);
         $result = $testedObject->getDec();
-        $this->assertEquals($exampleValue, $result);
+        $this->assertSame($exampleValue, $result);
     }
 
     /**
@@ -75,11 +75,11 @@ class KeyTest extends TestCase
 
         $testedObject->unserialize($data);
 
-        $this->assertEquals('id', $testedObject->getId());
-        $this->assertEquals('x', $testedObject->getX());
-        $this->assertEquals('y', $testedObject->getY());
-        $this->assertEquals('hex', $testedObject->getHex());
-        $this->assertEquals('dec', $testedObject->getDec());
+        $this->assertSame('id', $testedObject->getId());
+        $this->assertSame('x', $testedObject->getX());
+        $this->assertSame('y', $testedObject->getY());
+        $this->assertSame('hex', $testedObject->getHex());
+        $this->assertSame('dec', $testedObject->getDec());
     }
 
     /**

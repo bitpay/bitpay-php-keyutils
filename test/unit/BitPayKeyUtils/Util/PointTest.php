@@ -13,13 +13,13 @@ class PointTest extends TestCase
     public function test__toString()
     {
         $point = new Point('3', '2');
-        $this->assertEquals('(3, 2)', $point->__toString());
+        $this->assertSame('(3, 2)', $point->__toString());
     }
 
     public function test__toStringInfinite()
     {
         $point = new Point('inf', '2');
-        $this->assertEquals('inf', $point->__toString());
+        $this->assertSame('inf', $point->__toString());
     }
 
     public function testIsInfinityFalse()
@@ -37,13 +37,13 @@ class PointTest extends TestCase
     public function testGetX()
     {
         $point = $this->createClassObject();
-        $this->assertEquals('-2', $point->getX());
+        $this->assertSame('-2', $point->getX());
     }
 
     public function testGetY()
     {
         $point = $this->createClassObject();
-        $this->assertEquals('3', $point->getY());
+        $this->assertSame('3', $point->getY());
     }
 
     public function testSerialize()
@@ -51,7 +51,7 @@ class PointTest extends TestCase
         $expectedValue = 'a:2:{i:0;s:2:"-2";i:1;s:1:"3";}';
 
         $point = $this->createClassObject();
-        $this->assertEquals($expectedValue, $point->serialize());
+        $this->assertSame($expectedValue, $point->serialize());
     }
 
     public function testUnserialize()
@@ -60,7 +60,7 @@ class PointTest extends TestCase
         $testedData = 'a:2:{i:0;s:2:"-2";i:1;s:1:"3";}';
 
         $point = $this->createClassObject();
-        $this->assertEquals(null, $point->unserialize($testedData));
+        $this->assertSame(null, $point->unserialize($testedData));
     }
 
     public function test__serialize()
@@ -68,7 +68,7 @@ class PointTest extends TestCase
         $expectedValue = ['-2', '3'];
 
         $point = $this->createClassObject();
-        $this->assertEquals($expectedValue, $point->__serialize());
+        $this->assertSame($expectedValue, $point->__serialize());
     }
 
     public function test__unserialize()
@@ -76,7 +76,7 @@ class PointTest extends TestCase
         $expectedValue = ['-2', '3'];
 
         $point = $this->createClassObject();
-        $this->assertEquals(null, $point->__unserialize(['-2', '3']));
+        $this->assertSame(null, $point->__unserialize(['-2', '3']));
     }
 
     private function createClassObject()

@@ -23,31 +23,31 @@ class Base58Test extends TestCase
     public function testEncode()
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('P', $base58->encode('0x16'));
+        $this->assertSame('P', $base58->encode('0x16'));
     }
 
     public function testEncode2()
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('1', $base58->encode('00'));
+        $this->assertSame('1', $base58->encode('00'));
     }
 
     public function testDecode()
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('4f59cb', $base58->decode('Test'));
+        $this->assertSame('4f59cb', $base58->decode('Test'));
     }
 
     public function testDecode2()
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('02bf547c6d249ea9', $base58->decode('Test 5 T 2'));
+        $this->assertSame('02bf547c6d249ea9', $base58->decode('Test 5 T 2'));
     }
 
     public function testDecode3()
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('00', $base58->decode('1'));
+        $this->assertSame('00', $base58->decode('1'));
     }
 
     private function createClassObject()

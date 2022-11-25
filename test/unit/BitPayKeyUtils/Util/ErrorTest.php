@@ -10,7 +10,7 @@ class ErrorTest extends TestCase
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->backtrace();
-        $this->assertEquals('backtrace', $result[0]['function']);
+        $this->assertSame('backtrace', $result[0]['function']);
     }
 
     public function testBacktraceWhenPrintIsTrue()
@@ -47,7 +47,7 @@ class ErrorTest extends TestCase
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->reporting();
-        $this->assertEquals(error_reporting(), $result);
+        $this->assertSame(error_reporting(), $result);
     }
 
     public function testReportingWithLevel()
@@ -56,7 +56,7 @@ class ErrorTest extends TestCase
         $exampleReportingLevel = 32767;
         $testedObject->reporting($exampleReportingLevel);
         $currentLevel = error_reporting();
-        $this->assertEquals($exampleReportingLevel, $currentLevel);
+        $this->assertSame($exampleReportingLevel, $currentLevel);
     }
 
     public function testHandlerWithNoParams()

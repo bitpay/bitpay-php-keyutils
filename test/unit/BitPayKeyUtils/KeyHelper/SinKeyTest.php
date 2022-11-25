@@ -33,14 +33,14 @@ class SinKeyTest extends TestCase
         $property = $this->getAccessibleProperty(SinKey::class, 'value');
         $value = $property->getValue($this->sinKey);
 
-        $this->assertEquals($value, $this->sinKey->__toString());
+        $this->assertSame($value, $this->sinKey->__toString());
     }
 
     public function testSetPublicKey(): void
     {
         $publicKey = $this->getMockBuilder(PublicKey::class)->getMock();
 
-        $this->assertEquals($this->sinKey, $this->sinKey->setPublicKey($publicKey));
+        $this->assertSame($this->sinKey, $this->sinKey->setPublicKey($publicKey));
     }
 
     public function testGenerateWithoutPublicKey(): void
@@ -65,12 +65,12 @@ class SinKeyTest extends TestCase
         $this->sinKey->setPublicKey($publicKey);
         $this->sinKey->generate();
 
-        $this->assertEquals(true, $this->sinKey->isValid());
+        $this->assertSame(true, $this->sinKey->isValid());
     }
 
     public function testIsValidFalse(): void
     {
-        $this->assertEquals(false, $this->sinKey->isValid());
+        $this->assertSame(false, $this->sinKey->isValid());
     }
 
     private function getAccessibleProperty(string $class, string $property): ReflectionProperty

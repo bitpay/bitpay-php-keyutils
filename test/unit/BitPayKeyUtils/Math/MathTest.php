@@ -18,7 +18,7 @@ class MathTest extends TestCase
 
         $math = $this->createClassObject();
         $math::setEngine($expectedEngine);
-        $this->assertEquals($expectedEngine, $math::getEngine());
+        $this->assertSame($expectedEngine, $math::getEngine());
     }
 
     public function testGetEngineName()
@@ -27,7 +27,7 @@ class MathTest extends TestCase
 
         $math = $this->createClassObject();
         $math::setEngineName($expectedEngineName);
-        $this->assertEquals($expectedEngineName, $math::getEngineName());
+        $this->assertSame($expectedEngineName, $math::getEngineName());
     }
 
     private function createClassObject()

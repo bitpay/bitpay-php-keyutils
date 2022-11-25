@@ -18,7 +18,7 @@ class EncryptedFilesystemStorageTest extends TestCase
         $keyInterface = $this->getMockBuilder(Key::class)->getMock();
         $keyInterface->method('getId')->willReturn(__DIR__ . '/test11.txt');
         $this->assertFileExists(__DIR__ . '/test11.txt');
-        $this->assertEquals(null, $encryptedFilesystemStorage->persist($keyInterface));
+        $this->assertSame(null, $encryptedFilesystemStorage->persist($keyInterface));
 
     }
 
