@@ -20,7 +20,7 @@ class SecureRandomTest extends TestCase
         $reflection->setAccessible(true);
 
         $this->assertTrue($reflection->getValue());
-        $this->assertObjectHasAttribute('hasOpenSSL', $secureRandom);
+        $this->assertTrue(property_exists($secureRandom, 'hasOpenSSL'));
     }
 
     public function testGenerateRandom()

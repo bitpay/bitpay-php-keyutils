@@ -1,7 +1,6 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Util\ErrorHandler;
 use BitPayKeyUtils\Util\Error;
 
 class ErrorTest extends TestCase
@@ -70,7 +69,7 @@ class ErrorTest extends TestCase
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('error', 'set', null);
-        $this->assertInstanceOf(ErrorHandler::class, $result);
+        $this->assertInstanceOf(\PHPUnit\Runner\ErrorHandler::class, $result);
     }
 
     public function testHandlerWithActionFalse()
@@ -110,8 +109,16 @@ class ErrorTest extends TestCase
 
     public function testRaise()
     {
+        set_error_handler(
+            static function ( $errno, $errstr ) {
+                restore_error_handler();
+                throw new Exception( $errstr, $errno );
+            },
+            E_ALL
+        );
         $testedObject = $this->getTestedClassObject();
-        $this->expectError();
+        $this->expectExceptionMessage('error');
+
         $result = $testedObject->raise('error');
         $this->assertTrue($result);
     }
