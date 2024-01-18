@@ -20,7 +20,7 @@ class FilesystemStorageTest extends TestCase
         $keyInterface->method('getId')->willReturn(__DIR__ . '/test1.txt');
         $this->assertFileExists(__DIR__ . '/test1.txt');
         @chmod(__DIR__ . 'test1.txt', 0777);
-        $this->assertEquals(null, $filesystemStorage->persist($keyInterface));
+        $this->assertSame(null, $filesystemStorage->persist($keyInterface));
     }
 
     public function testLoadNotFindException()
@@ -49,7 +49,7 @@ class FilesystemStorageTest extends TestCase
         $expectedArray = ['Red', 'Green', 'Blue'];
 
         $filesystemStorage = $this->createClassObject();
-        $this->assertEquals($expectedArray, $filesystemStorage->load(__DIR__ . '/test4.txt'));
+        $this->assertSame($expectedArray, $filesystemStorage->load(__DIR__ . '/test4.txt'));
     }
 
     private function createClassObject()

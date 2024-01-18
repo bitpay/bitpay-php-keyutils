@@ -16,7 +16,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '12';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->add('5', '7'));
+        $this->assertSame($expectedValue, $bcEngine->add('5', '7'));
     }
 
     public function testInput()
@@ -24,7 +24,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '5';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->input($expectedValue));
+        $this->assertSame($expectedValue, $bcEngine->input($expectedValue));
     }
 
     public function testInputNull()
@@ -32,7 +32,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '0';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->input(null));
+        $this->assertSame($expectedValue, $bcEngine->input(null));
     }
 
     public function testInputHex()
@@ -40,7 +40,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '86';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->input('0x56'));
+        $this->assertSame($expectedValue, $bcEngine->input('0x56'));
     }
 
     public function testInputException()
@@ -53,26 +53,26 @@ class BcEngineTest extends TestCase
 
     public function testCmpGreaterThan()
     {
-        $expectedValue = '1';
+        $expectedValue = 1;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->cmp('9', '7'));
+        $this->assertSame($expectedValue, $bcEngine->cmp('9', '7'));
     }
 
     public function testCmpLessThan()
     {
-        $expectedValue = '-1';
+        $expectedValue = -1;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->cmp('7', '9'));
+        $this->assertSame($expectedValue, $bcEngine->cmp('7', '9'));
     }
 
     public function testCmpEqualsTo()
     {
-        $expectedValue = '0';
+        $expectedValue = 0;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->cmp('7', '7'));
+        $this->assertSame($expectedValue, $bcEngine->cmp('7', '7'));
     }
 
     public function testDiv()
@@ -80,7 +80,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '3';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->div('6', '2'));
+        $this->assertSame($expectedValue, $bcEngine->div('6', '2'));
     }
 
     public function testInvertm()
@@ -88,7 +88,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '0';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->invertm('6', '2'));
+        $this->assertSame($expectedValue, $bcEngine->invertm('6', '2'));
     }
 
     public function testInvertm2()
@@ -96,7 +96,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '1';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->invertm('-1', '2'));
+        $this->assertSame($expectedValue, $bcEngine->invertm('-1', '2'));
     }
 
     public function testMod()
@@ -104,7 +104,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '0';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->mod('6', '2'));
+        $this->assertSame($expectedValue, $bcEngine->mod('6', '2'));
     }
 
     public function testMod2()
@@ -112,7 +112,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '2';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->mod('-6', '2'));
+        $this->assertSame($expectedValue, $bcEngine->mod('-6', '2'));
     }
 
     public function testMul()
@@ -120,7 +120,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '21';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->mul('3', '7'));
+        $this->assertSame($expectedValue, $bcEngine->mul('3', '7'));
     }
 
     public function testPow()
@@ -128,7 +128,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '64';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->pow('4', '3'));
+        $this->assertSame($expectedValue, $bcEngine->pow('4', '3'));
     }
 
     public function testSub()
@@ -136,7 +136,7 @@ class BcEngineTest extends TestCase
         $expectedValue = '18';
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->sub('20', '2'));
+        $this->assertSame($expectedValue, $bcEngine->sub('20', '2'));
     }
 
     public function testCoprime()
@@ -144,7 +144,7 @@ class BcEngineTest extends TestCase
         $expectedValue = false;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->coprime('20', '2'));
+        $this->assertSame($expectedValue, $bcEngine->coprime('20', '2'));
     }
 
     public function testCoprime2()
@@ -152,7 +152,7 @@ class BcEngineTest extends TestCase
         $expectedValue = true;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->coprime('5', '3'));
+        $this->assertSame($expectedValue, $bcEngine->coprime('5', '3'));
     }
 
     public function testCoprime3()
@@ -160,7 +160,7 @@ class BcEngineTest extends TestCase
         $expectedValue = true;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->coprime('3', '5'));
+        $this->assertSame($expectedValue, $bcEngine->coprime('3', '5'));
     }
 
     public function testCoprime4()
@@ -168,7 +168,7 @@ class BcEngineTest extends TestCase
         $expectedValue = false;
 
         $bcEngine = $this->createClassObject();
-        $this->assertEquals($expectedValue, $bcEngine->coprime('3', '3'));
+        $this->assertSame($expectedValue, $bcEngine->coprime('3', '3'));
     }
 
     private function createClassObject()

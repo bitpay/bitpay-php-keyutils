@@ -17,7 +17,7 @@ class PrivateKeyTest extends TestCase
 		
 		$testedObject->setHex( $exampleValue );
 		$realValue = $this->accessProtected( $testedObject, 'hex' );
-		$this->assertEquals( $exampleValue, $realValue );
+		$this->assertSame( $exampleValue, $realValue );
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class PrivateKeyTest extends TestCase
 		$testedObject->setHex( $expectedValue );
 		$result    = $testedObject->generate();
 		$realValue = $this->accessProtected( $result, 'hex' );
-		$this->assertEquals( $expectedValue, $realValue );
+		$this->assertSame( $expectedValue, $realValue );
 	}
 	
 	public function testIsValidIfKeyNotSet()
@@ -109,8 +109,8 @@ class PrivateKeyTest extends TestCase
 		$result = $testedObject->pemDecode( self::EXAMPLE_ECDSA_KEY );
 		
 		$this->assertIsArray( $result );
-		$this->assertEquals( '52f7b0b9e2a06703bc758cfc13e5370f7a04ec7528a728daab2ae14c21414a2c', $result[ 'private_key' ] );
-		$this->assertEquals(
+		$this->assertSame( '52f7b0b9e2a06703bc758cfc13e5370f7a04ec7528a728daab2ae14c21414a2c', $result[ 'private_key' ] );
+		$this->assertSame(
 			'045ecd459aae1074f01b9f737271d114f873a3737916f5e7dbb28da423fbdd0d359c482324df5d2ce771b7b510a50c13cfbae240b0a8216cf7da4da52999714234',
 			$result[ 'public_key' ] );
 	}
@@ -177,7 +177,7 @@ class PrivateKeyTest extends TestCase
 		$testedObject = $this->createClassObject();
 		$testedObject->setHex( self::EXAMPLE_HEX_STRING );
 		
-		$this->assertEquals( self::EXAMPLE_HEX_STRING, (string) $testedObject );
+		$this->assertSame( self::EXAMPLE_HEX_STRING, (string) $testedObject );
 	}
 	
 	public function testGetPublicKeyIfKeyIsNull()
@@ -195,7 +195,7 @@ class PrivateKeyTest extends TestCase
 		$secondResult = $testedObject->getPublicKey();
 		
 		$this->assertInstanceOf( PublicKey::class, $firstResult );
-		$this->assertEquals( $firstResult, $secondResult );
+		$this->assertSame( $firstResult, $secondResult );
 	}
 	
 	private function createClassObject(): PrivateKey

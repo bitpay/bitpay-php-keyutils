@@ -23,6 +23,6 @@ class FingerprintTest extends TestCase
         $actualValue = $fingerprint::generate();
 
         $this->assertIsString($actualValue);
-        $this->assertEquals($expectedValue, $actualValue);
+        $this->assertSame($expectedValue, $actualValue);
     }
 }

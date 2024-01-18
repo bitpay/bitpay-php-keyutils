@@ -12,7 +12,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->add('2', '3');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testCmpGreaterThan()
@@ -22,7 +22,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->cmp('1234', '1000');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testCmpLessThan()
@@ -32,7 +32,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->cmp('1000', '1234');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testCmpEqualTo()
@@ -42,7 +42,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->cmp('1000', '1000');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testDiv()
@@ -52,7 +52,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->div('10', '5');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testInvertm()
@@ -62,7 +62,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->invertm('5', '11');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testMod()
@@ -72,7 +72,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->mod('7', '4');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testMul()
@@ -82,7 +82,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->mul('8', '2');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testPow()
@@ -92,7 +92,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->pow('3', '3');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     public function testSub()
@@ -102,7 +102,7 @@ class GmpEngineTest extends TestCase
         $actualResult = $gmp->sub('64', '22');
 
         $this->assertIsString($actualResult);
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertSame($expectedResult, $actualResult);
     }
 
     private function createClassObject()

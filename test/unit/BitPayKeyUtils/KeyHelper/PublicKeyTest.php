@@ -27,13 +27,13 @@ class PublicKeyTest extends TestCase
 
         $testedObject = $this->getTestedClassObject();
         $testedObject->setPrivateKey($privateKeyMock);
-        $this->assertEquals($privateKeyMock, $this->accessProtected($testedObject, 'privateKey'));
+        $this->assertSame($privateKeyMock, $this->accessProtected($testedObject, 'privateKey'));
     }
 
     public function testToStringWhenXIsNull()
     {
         $testedObject = $this->getTestedClassObject();
-        $this->assertEquals('', (string)$testedObject);
+        $this->assertSame('', (string)$testedObject);
     }
 
     /**
@@ -47,7 +47,7 @@ class PublicKeyTest extends TestCase
         $this->setProtectedPropertyValue($testedObject, 'y', 1);
 
         $toStringCompressionResult = '031';
-        $this->assertEquals($toStringCompressionResult, (string)$testedObject);
+        $this->assertSame($toStringCompressionResult, (string)$testedObject);
     }
 
     /**
@@ -61,7 +61,7 @@ class PublicKeyTest extends TestCase
         $this->setProtectedPropertyValue($testedObject, 'y', 4);
 
         $toStringCompressionResult = '021';
-        $this->assertEquals($toStringCompressionResult, (string)$testedObject);
+        $this->assertSame($toStringCompressionResult, (string)$testedObject);
     }
 
     public function testIsValidWhenPublicKeyIsBlank()
