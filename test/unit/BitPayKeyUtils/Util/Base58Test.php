@@ -1,56 +1,60 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Util;
+
 use BitPayKeyUtils\Util\Base58;
 use PHPUnit\Framework\TestCase;
 
 class Base58Test extends TestCase
 {
-    public function testInstanceOf()
+    public function testInstanceOf(): void
     {
         $base58 = $this->createClassObject();
-        $this->assertInstanceOf(Base58::class, $base58);
+        self::assertInstanceOf(Base58::class, $base58);
     }
 
-    public function testEncodeException()
+    public function testEncodeException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Invalid Length');
 
         $base58 = $this->createClassObject();
         $base58->encode('0x16p4t');
     }
 
-    public function testEncode()
+    public function testEncode(): void
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('P', $base58->encode('0x16'));
+        self::assertSame('P', $base58->encode('0x16'));
     }
 
-    public function testEncode2()
+    public function testEncode2(): void
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('1', $base58->encode('00'));
+        self::assertSame('1', $base58->encode('00'));
     }
 
-    public function testDecode()
+    public function testDecode(): void
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('4f59cb', $base58->decode('Test'));
+        self::assertSame('4f59cb', $base58->decode('Test'));
     }
 
-    public function testDecode2()
+    public function testDecode2(): void
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('02bf547c6d249ea9', $base58->decode('Test 5 T 2'));
+        self::assertSame('02bf547c6d249ea9', $base58->decode('Test 5 T 2'));
     }
 
-    public function testDecode3()
+    public function testDecode3(): void
     {
         $base58 = $this->createClassObject();
-        $this->assertEquals('00', $base58->decode('1'));
+        self::assertSame('00', $base58->decode('1'));
     }
 
-    private function createClassObject()
+    private function createClassObject(): Base58
     {
         return new Base58();
     }

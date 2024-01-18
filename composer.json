@@ -14,6 +14,11 @@
       "": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "BitPayKeyUtils\\UnitTest\\": "test/unit/BitPayKeyUtils"
+    }
+  },
   "require": {
     "php": "^8.1 || ^8.2 || ^8.3",
     "ext-bcmath": "*",

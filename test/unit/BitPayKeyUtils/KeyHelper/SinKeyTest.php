@@ -1,5 +1,8 @@
 <?php
+
 declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\KeyHelper;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitPayKeyUtils\KeyHelper\PublicKey;
@@ -8,10 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class SinKeyTest extends TestCase
 {
-    /**
-     * @var SinKey $sinKey
-     */
-    private $sinKey;
+    private ?SinKey $sinKey;
 
     public function setUp(): void
     {
@@ -20,7 +20,7 @@ class SinKeyTest extends TestCase
 
     public function test__toStringEmpty(): void
     {
-        $this->assertEmpty($this->sinKey->__toString());
+        self::assertEmpty($this->sinKey->__toString());
     }
 
     public function test__toStringValue(): void
@@ -33,19 +33,19 @@ class SinKeyTest extends TestCase
         $property = $this->getAccessibleProperty(SinKey::class, 'value');
         $value = $property->getValue($this->sinKey);
 
-        $this->assertEquals($value, $this->sinKey->__toString());
+        self::assertSame($value, $this->sinKey->__toString());
     }
 
     public function testSetPublicKey(): void
     {
         $publicKey = $this->getMockBuilder(PublicKey::class)->getMock();
 
-        $this->assertEquals($this->sinKey, $this->sinKey->setPublicKey($publicKey));
+        self::assertSame($this->sinKey, $this->sinKey->setPublicKey($publicKey));
     }
 
     public function testGenerateWithoutPublicKey(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->sinKey->generate();
     }
 
@@ -53,7 +53,7 @@ class SinKeyTest extends TestCase
     {
         $property = $this->getAccessibleProperty(SinKey::class, 'publicKey');
         $property->setValue($this->sinKey, '');
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->sinKey->generate();
     }
 
@@ -65,17 +65,17 @@ class SinKeyTest extends TestCase
         $this->sinKey->setPublicKey($publicKey);
         $this->sinKey->generate();
 
-        $this->assertEquals(true, $this->sinKey->isValid());
+        self::assertSame(true, $this->sinKey->isValid());
     }
 
     public function testIsValidFalse(): void
     {
-        $this->assertEquals(false, $this->sinKey->isValid());
+        self::assertSame(false, $this->sinKey->isValid());
     }
 
-    private function getAccessibleProperty(string $class, string $property): ReflectionProperty
+    private function getAccessibleProperty(string $class, string $property): \ReflectionProperty
     {
-        $reflection = new ReflectionClass($class);
+        $reflection = new \ReflectionClass($class);
         $property = $reflection->getProperty($property);
         $property->setAccessible(true);
 

@@ -1,85 +1,90 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Util;
+
 use BitPayKeyUtils\Util\Point;
 use PHPUnit\Framework\TestCase;
 
 class PointTest extends TestCase
 {
-    public function testInstanceOf(){
+    public function testInstanceOf(): void
+    {
         $point = $this->createClassObject();
-        $this->assertInstanceOf(Point::class, $point);
+        self::assertInstanceOf(Point::class, $point);
     }
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $point = new Point('3', '2');
-        $this->assertEquals('(3, 2)', $point->__toString());
+        self::assertSame('(3, 2)', $point->__toString());
     }
 
-    public function test__toStringInfinite()
+    public function test__toStringInfinite(): void
     {
         $point = new Point('inf', '2');
-        $this->assertEquals('inf', $point->__toString());
+        self::assertSame('inf', $point->__toString());
     }
 
-    public function testIsInfinityFalse()
+    public function testIsInfinityFalse(): void
     {
         $point = $this->createClassObject();
-        $this->assertFalse($point->isInfinity());
+        self::assertFalse($point->isInfinity());
     }
 
-    public function testIsInfinityTrue()
+    public function testIsInfinityTrue(): void
     {
         $point = new Point('inf', '4');
-        $this->assertTrue($point->isInfinity());
+        self::assertTrue($point->isInfinity());
     }
 
-    public function testGetX()
+    public function testGetX(): void
     {
         $point = $this->createClassObject();
-        $this->assertEquals('-2', $point->getX());
+        self::assertSame('-2', $point->getX());
     }
 
-    public function testGetY()
+    public function testGetY(): void
     {
         $point = $this->createClassObject();
-        $this->assertEquals('3', $point->getY());
+        self::assertSame('3', $point->getY());
     }
 
-    public function testSerialize()
+    public function testSerialize(): void
     {
         $expectedValue = 'a:2:{i:0;s:2:"-2";i:1;s:1:"3";}';
 
         $point = $this->createClassObject();
-        $this->assertEquals($expectedValue, $point->serialize());
+        self::assertSame($expectedValue, $point->serialize());
     }
 
-    public function testUnserialize()
+    public function testUnserialize(): void
     {
         $expectedValue = '[-2, 3]';
         $testedData = 'a:2:{i:0;s:2:"-2";i:1;s:1:"3";}';
 
         $point = $this->createClassObject();
-        $this->assertEquals(null, $point->unserialize($testedData));
+        self::assertSame(null, $point->unserialize($testedData));
     }
 
-    public function test__serialize()
+    public function test__serialize(): void
     {
         $expectedValue = ['-2', '3'];
 
         $point = $this->createClassObject();
-        $this->assertEquals($expectedValue, $point->__serialize());
+        self::assertSame($expectedValue, $point->__serialize());
     }
 
-    public function test__unserialize()
+    public function test__unserialize(): void
     {
         $expectedValue = ['-2', '3'];
 
         $point = $this->createClassObject();
-        $this->assertEquals(null, $point->__unserialize(['-2', '3']));
+        self::assertSame(null, $point->__unserialize(['-2', '3']));
     }
 
-    private function createClassObject()
+    private function createClassObject(): Point
     {
         return new Point('-2', '3');
     }

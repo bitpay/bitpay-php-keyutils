@@ -1,38 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Util;
+
 use BitPayKeyUtils\Util\SecureRandom;
 use PHPUnit\Framework\TestCase;
 
 class SecureRandomTest extends TestCase
 {
-    public function testInstanceOf()
+    public function testInstanceOf(): void
     {
         $secureRandom = $this->createClassObject();
-        $this->assertInstanceOf(SecureRandom::class, $secureRandom);
+        self::assertInstanceOf(SecureRandom::class, $secureRandom);
     }
 
-    public function testHasOpenSSL()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testHasOpenSSL(): void
     {
         $secureRandom = $this->createClassObject();
         $secureRandom::hasOpenSSL();
 
-        $reflection = new ReflectionProperty($secureRandom, 'hasOpenSSL');
+        $reflection = new \ReflectionProperty($secureRandom, 'hasOpenSSL');
         $reflection->setAccessible(true);
 
-        $this->assertTrue($reflection->getValue());
-        $this->assertTrue(property_exists($secureRandom, 'hasOpenSSL'));
+        self::assertTrue($reflection->getValue());
+        self::assertTrue(property_exists($secureRandom, 'hasOpenSSL'));
     }
 
-    public function testGenerateRandom()
+    public function testGenerateRandom(): void
     {
         $secureRandom = $this->createClassObject();
         $secureRandom::generateRandom();
-        $this->assertIsString($secureRandom::generateRandom());
+        self::assertIsString($secureRandom::generateRandom());
     }
 
-    public function testGenerateRandomException()
+    public function testGenerateRandomException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $reflection = new \ReflectionProperty(SecureRandom::class, 'hasOpenSSL');
         $reflection->setAccessible(true);

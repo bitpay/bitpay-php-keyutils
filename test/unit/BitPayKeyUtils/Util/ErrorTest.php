@@ -1,35 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Util;
+
 use PHPUnit\Framework\TestCase;
 use BitPayKeyUtils\Util\Error;
 
 class ErrorTest extends TestCase
 {
-    public function testBacktraceWhenPrintIsFalse()
+    public function testBacktraceWhenPrintIsFalse(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->backtrace();
-        $this->assertEquals('backtrace', $result[0]['function']);
+        self::assertSame('backtrace', $result[0]['function']);
     }
 
-    public function testBacktraceWhenPrintIsTrue()
+    public function testBacktraceWhenPrintIsTrue(): void
     {
         $testedObject = $this->getTestedClassObject();
         ob_start();
         $testedObject->backtrace(true);
         $result = ob_get_clean();
-        $this->assertIsString($result);
+        self::assertIsString($result);
     }
 
-    public function testLastWhenNoErrorOccured()
+    public function testLastWhenNoErrorOccured(): void
     {
         error_clear_last();
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->last();
-        $this->assertNull($result);
+        self::assertNull($result);
     }
 
-    public function testLog()
+    public function testLog(): void
     {
         $exampleLogMessage = 'test';
         $testedObject = $this->getTestedClassObject();
@@ -39,80 +43,80 @@ class ErrorTest extends TestCase
         ini_set('error_log', $errorLogLocationBackup);
         $result = stream_get_contents($errorLogTemporaryFile);
 
-        $this->assertStringContainsString($exampleLogMessage, $result);
+        self::assertStringContainsString($exampleLogMessage, $result);
     }
 
-    public function testReportingWithNoParam()
+    public function testReportingWithNoParam(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->reporting();
-        $this->assertEquals(error_reporting(), $result);
+        self::assertSame(error_reporting(), $result);
     }
 
-    public function testReportingWithLevel()
+    public function testReportingWithLevel(): void
     {
         $testedObject = $this->getTestedClassObject();
         $exampleReportingLevel = 32767;
         $testedObject->reporting($exampleReportingLevel);
         $currentLevel = error_reporting();
-        $this->assertEquals($exampleReportingLevel, $currentLevel);
+        self::assertSame($exampleReportingLevel, $currentLevel);
     }
 
-    public function testHandlerWithNoParams()
+    public function testHandlerWithNoParams(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler();
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
-    public function testHandlerWithActionSet()
+    public function testHandlerWithActionSet(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('error', 'set', null);
-        $this->assertInstanceOf(\PHPUnit\Runner\ErrorHandler::class, $result);
+        self::assertInstanceOf(\PHPUnit\Runner\ErrorHandler::class, $result);
     }
 
-    public function testHandlerWithActionFalse()
+    public function testHandlerWithActionFalse(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('error', false);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
-    public function testHandlerWithTypeExceptionAndNoAction()
+    public function testHandlerWithTypeExceptionAndNoAction(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('exception', false);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
-    public function testHandlerWithTypeExceptionAndActionSet()
+    public function testHandlerWithTypeExceptionAndActionSet(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('exception', 'set', null);
-        $this->assertNull($result);
+        self::assertNull($result);
     }
 
-    public function testHandlerWithTypeExceptionAndActionRestore()
+    public function testHandlerWithTypeExceptionAndActionRestore(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('exception', 'restore', null);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
-    public function testHandlerWithUnhandledType()
+    public function testHandlerWithUnhandledType(): void
     {
         $testedObject = $this->getTestedClassObject();
         $result = $testedObject->handler('asd', 'restore', null);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
-    public function testRaise()
+    public function testRaise(): void
     {
         set_error_handler(
             static function ( $errno, $errstr ) {
                 restore_error_handler();
-                throw new Exception( $errstr, $errno );
+                throw new \Exception( $errstr, $errno );
             },
             E_ALL
         );
@@ -120,7 +124,7 @@ class ErrorTest extends TestCase
         $this->expectExceptionMessage('error');
 
         $result = $testedObject->raise('error');
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     private function getTestedClassObject(): Error
