@@ -1,30 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Storage;
+
 use BitPayKeyUtils\KeyHelper\Key;
 use BitPayKeyUtils\Storage\EncryptedFilesystemStorage;
 use PHPUnit\Framework\TestCase;
 
 class EncryptedFilesystemStorageTest extends TestCase
 {
-    public function testInstanceOf()
+    public function testInstanceOf(): void
     {
         $encryptedFilesystemStorage = $this->createClassObject();
-        $this->assertInstanceOf(EncryptedFilesystemStorage::class, $encryptedFilesystemStorage);
+        self::assertInstanceOf(EncryptedFilesystemStorage::class, $encryptedFilesystemStorage);
     }
 
-    public function testPersist()
+    public function testPersist(): void
     {
         $encryptedFilesystemStorage = $this->createClassObject();
-        $keyInterface = $this->getMockBuilder(Key::class)->getMock();
+        $keyInterface = $this->getMockBuilder(Key::class)->setMockClassName('KeyMock')->getMock();
         $keyInterface->method('getId')->willReturn(__DIR__ . '/test11.txt');
-        $this->assertFileExists(__DIR__ . '/test11.txt');
-        $this->assertEquals(null, $encryptedFilesystemStorage->persist($keyInterface));
-
+        self::assertFileExists(__DIR__ . '/test11.txt');
+        self::assertSame(null, $encryptedFilesystemStorage->persist($keyInterface));
     }
 
-    public function testLoadNotFindException()
+    public function testLoadNotFindException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Could not find "'.__DIR__.'/test2.txt"');
 
         $encryptedFilesystemStorage = $this->createClassObject();
@@ -42,13 +45,13 @@ class EncryptedFilesystemStorageTest extends TestCase
     }
      **/
 
-    public function testLoad()
+    public function testLoad(): void
     {
        $encryptedFilesystemStorage = $this->createClassObject();
-       $this->assertIsObject($encryptedFilesystemStorage->load(__DIR__ . '/test11.txt'));
+       self::assertIsObject($encryptedFilesystemStorage->load(__DIR__ . '/test11.txt'));
     }
 
-    private function createClassObject()
+    private function createClassObject(): EncryptedFilesystemStorage
     {
         return new EncryptedFilesystemStorage('test');
     }

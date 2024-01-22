@@ -1,31 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Storage;
+
 use BitPayKeyUtils\KeyHelper\Key;
 use BitPayKeyUtils\Storage\FilesystemStorage;
 use PHPUnit\Framework\TestCase;
 
 class FilesystemStorageTest extends TestCase
 {
-    public function testInstanceOf()
+    public function testInstanceOf(): void
     {
         $filesystemStorage = $this->createClassObject();
 
-        $this->assertInstanceOf(FilesystemStorage::class, $filesystemStorage);
+        self::assertInstanceOf(FilesystemStorage::class, $filesystemStorage);
     }
 
-    public function testPersist()
+    public function testPersist(): void
     {
         $filesystemStorage = $this->createClassObject();
-        $keyInterface = $this->getMockBuilder(Key::class)->getMock();
+        $keyInterface = $this->getMockBuilder(Key::class)->setMockClassName('KeyMock')->getMock();
         $keyInterface->method('getId')->willReturn(__DIR__ . '/test1.txt');
-        $this->assertFileExists(__DIR__ . '/test1.txt');
+        self::assertFileExists(__DIR__ . '/test1.txt');
         @chmod(__DIR__ . 'test1.txt', 0777);
-        $this->assertEquals(null, $filesystemStorage->persist($keyInterface));
+        $filesystemStorage->persist($keyInterface);
     }
 
-    public function testLoadNotFindException()
+    public function testLoadNotFindException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Could not find "'.__DIR__.'/test2.txt"');
 
         $filesystemStorage = $this->createClassObject();
@@ -44,15 +48,15 @@ class FilesystemStorageTest extends TestCase
     }
     **/
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $expectedArray = ['Red', 'Green', 'Blue'];
 
         $filesystemStorage = $this->createClassObject();
-        $this->assertEquals($expectedArray, $filesystemStorage->load(__DIR__ . '/test4.txt'));
+        self::assertSame($expectedArray, $filesystemStorage->load(__DIR__ . '/test4.txt'));
     }
 
-    private function createClassObject()
+    private function createClassObject(): FilesystemStorage
     {
         return new FilesystemStorage();
     }

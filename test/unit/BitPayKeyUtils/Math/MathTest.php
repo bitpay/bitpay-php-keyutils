@@ -1,36 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
+namespace BitPayKeyUtils\UnitTest\Math;
+
 use BitPayKeyUtils\Math\GmpEngine;
 use BitPayKeyUtils\Math\Math;
 use PHPUnit\Framework\TestCase;
 
 class MathTest extends TestCase
 {
-    public function testInstanceOf()
+    public function testInstanceOf(): void
     {
         $math = $this->createClassObject();
-        $this->assertInstanceOf(Math::class, $math);
+        self::assertInstanceOf(Math::class, $math);
     }
 
-    public function testGetEngine()
+    public function testGetEngine(): void
     {
         $expectedEngine = new GmpEngine();
 
         $math = $this->createClassObject();
         $math::setEngine($expectedEngine);
-        $this->assertEquals($expectedEngine, $math::getEngine());
+        self::assertSame($expectedEngine, $math::getEngine());
     }
 
-    public function testGetEngineName()
+    public function testGetEngineName(): void
     {
         $expectedEngineName = 'Test engine name';
 
         $math = $this->createClassObject();
         $math::setEngineName($expectedEngineName);
-        $this->assertEquals($expectedEngineName, $math::getEngineName());
+        self::assertSame($expectedEngineName, $math::getEngineName());
     }
 
-    private function createClassObject()
+    private function createClassObject(): Math
     {
         return new Math();
     }
