@@ -9,7 +9,6 @@
 /.settings/
 .project
 .buildpath
-composer.lock
 composer.phar
 .DS_Store
 build/.DS_Store
