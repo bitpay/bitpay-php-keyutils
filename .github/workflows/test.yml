@@ -24,6 +24,7 @@ jobs:
           configuration: phpunit.xml
           php_version: ${{ matrix.php-version }}
           php_extensions: bcmath gmp xdebug
+          version: 9.6.9
   phpcs:
     runs-on: ubuntu-latest
     
