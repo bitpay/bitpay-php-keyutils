@@ -19,3 +19,5 @@ examples/.DS_Store
 .phpunit.cache/
 .phpunit.result.cache
 test/unit/_html
+test/unit/BitPayKeyUtils/Storage/test1.txt
+test/unit/BitPayKeyUtils/Storage/test11.txt

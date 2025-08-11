@@ -19,9 +19,7 @@ class Util
 
     /**
      * Computes a digest hash value for the given data using
-     * the given method, and returns a raw or binhex encoded
-     * string, see:
-     * http://us1.php.net/manual/en/function.openssl-digest.php
+     * the hash function.
      *
      * @param string $data
      *
@@ -29,7 +27,7 @@ class Util
      */
     public static function sha512($data)
     {
-        return openssl_digest($data, 'sha512');
+        return hash('sha512', $data);
     }
 
     /**
@@ -68,7 +66,7 @@ class Util
      */
     public static function ripe160($data, $binary = false)
     {
-        return openssl_digest($data, 'ripemd160', $binary);
+        return hash('ripemd160', $data, $binary);
     }
 
     /**
@@ -84,7 +82,7 @@ class Util
      */
     public static function sha256($data, $binary = false)
     {
-        return openssl_digest($data, 'SHA256', $binary);
+        return hash('sha256', $data, $binary);
     }
 
     /**
