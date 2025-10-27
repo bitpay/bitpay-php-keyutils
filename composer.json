@@ -28,7 +28,7 @@
     "ext-iconv": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^10.5.48"
+    "phpunit/phpunit": "^10.5.58"
   },
   "suggest": {
     "ext-gmp": "GMP provides better performance than BCMath"
