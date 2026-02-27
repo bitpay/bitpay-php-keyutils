@@ -161,14 +161,12 @@ class PublicKeyTest extends TestCase
     {
         $reflection = new \ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
-        $property->setAccessible(true);
         return $property->getValue($obj);
     }
 
     private function setProtectedPropertyValue(&$instance, $propertyName, $propertyValue): void
     {
         $reflection = new \ReflectionProperty(get_class($instance), $propertyName);
-        $reflection->setAccessible(true);
         $reflection->setValue($instance, $propertyValue);
     }
 

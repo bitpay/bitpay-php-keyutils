@@ -89,7 +89,6 @@ class KeyTest extends TestCase
     private function setProtectedPropertyValue(&$instance, $propertyName, $propertyValue): void
     {
         $reflection = new \ReflectionProperty(get_class($instance), $propertyName);
-        $reflection->setAccessible(true);
         $reflection->setValue($instance, $propertyValue);
     }
 

@@ -76,7 +76,6 @@ curl_setopt($curlCli, CURLOPT_RETURNTRANSFER, true);
 
 $result = curl_exec($curlCli);
 $resultData = json_decode($result, TRUE);
-curl_close($curlCli);
 
 if (array_key_exists('error', $resultData)) {
     echo $resultData['error'];

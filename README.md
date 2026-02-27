@@ -27,7 +27,7 @@ Add to your composer.json file by hand.
     ...
     "require": {
         ...
-        "bitpay/key-utils": "~2.0"
+        "bitpay/key-utils": "~2.2"
     }
     ...
 }
@@ -42,7 +42,7 @@ php composer.phar update bitpay/key-utils
 ### Install using composer
 
 ```bash
-php composer.phar require bitpay/key-utils:~2.0
+php composer.phar require bitpay/key-utils:~2.2
 ```
 
 # Usage

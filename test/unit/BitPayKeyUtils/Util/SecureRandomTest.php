@@ -24,7 +24,6 @@ class SecureRandomTest extends TestCase
         $secureRandom::hasOpenSSL();
 
         $reflection = new \ReflectionProperty($secureRandom, 'hasOpenSSL');
-        $reflection->setAccessible(true);
 
         self::assertTrue($reflection->getValue());
         self::assertTrue(property_exists($secureRandom, 'hasOpenSSL'));
@@ -42,7 +41,6 @@ class SecureRandomTest extends TestCase
         $this->expectException(\Exception::class);
 
         $reflection = new \ReflectionProperty(SecureRandom::class, 'hasOpenSSL');
-        $reflection->setAccessible(true);
         $reflection->setValue(null, false);
 
         $secureRandom = $this->createClassObject();
