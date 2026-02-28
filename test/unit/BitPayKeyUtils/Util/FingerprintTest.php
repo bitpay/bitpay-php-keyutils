@@ -20,7 +20,6 @@ class FingerprintTest extends TestCase
         $expectedValue = 'ce9c26116feb916c356b5313226ff177bf30f819';
 
         $reflection = new \ReflectionProperty(Fingerprint::class, 'finHash');
-        $reflection->setAccessible(true);
         $reflection->setValue(null, $expectedValue);
 
         $fingerprint = new Fingerprint();

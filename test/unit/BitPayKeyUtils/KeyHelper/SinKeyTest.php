@@ -81,7 +81,6 @@ class SinKeyTest extends TestCase
     {
         $reflection = new \ReflectionClass($class);
         $property = $reflection->getProperty($property);
-        $property->setAccessible(true);
 
         return $property;
     }
