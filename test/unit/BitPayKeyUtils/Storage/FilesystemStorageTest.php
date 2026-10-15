@@ -60,6 +60,61 @@ class FilesystemStorageTest extends TestCase
         self::assertSame($expectedArray, $filesystemStorage->load(__DIR__ . '/test4.txt'));
     }
 
+    public function testPersistCreatesFileReadableOnlyByOwner(): void
+    {
+        $this->skipOnWindows();
+        $path = $this->tempPath();
+
+        $previousUmask = umask(0022);
+        try {
+            $this->createClassObject()->persist($this->keyWithId($path, 'KeyMockFs1'));
+            self::assertSame(0022, umask(), 'persist() must restore the umask');
+        } finally {
+            umask($previousUmask);
+        }
+
+        clearstatcache(true, $path); // PHP caches stat() results, including the file mode
+        self::assertSame(0600, fileperms($path) & 0777);
+        unlink($path);
+    }
+
+    public function testPersistTightensExistingFile(): void
+    {
+        $this->skipOnWindows();
+        $path = $this->tempPath();
+        file_put_contents($path, 'old key');
+        chmod($path, 0644);
+
+        $this->createClassObject()->persist($this->keyWithId($path, 'KeyMockFs2'));
+
+        clearstatcache(true, $path); // PHP caches stat() results, including the file mode
+        self::assertSame(0600, fileperms($path) & 0777);
+        unlink($path);
+    }
+
+    private function keyWithId(string $path, string $mockName): Key
+    {
+        $key = $this->getMockBuilder(Key::class)->setMockClassName($mockName)->getMock();
+        $key->method('getId')->willReturn($path);
+
+        return $key;
+    }
+
+    private function tempPath(): string
+    {
+        $path = tempnam(sys_get_temp_dir(), 'bitpay-key-');
+        unlink($path);
+
+        return $path;
+    }
+
+    private function skipOnWindows(): void
+    {
+        if (DIRECTORY_SEPARATOR === '\\') {
+            self::markTestSkipped('POSIX permissions do not apply on Windows');
+        }
+    }
+
     private function createClassObject(): FilesystemStorage
     {
         return new FilesystemStorage();
